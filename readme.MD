@@ -7,6 +7,11 @@ This project demonstrates how to work with NLP (Natural Language Processing) NLU
 
 The project is a Streamlit application that can take different types of input data and extract the most important information from the input data in which the user can start asking questions about the data.
 
+## Requirements
+
+* `pip install streamlit`
+* `pip install streamlit_option_menu`
+
 ## Input Data
 The types of input data that the application can handle are:
 
@@ -25,7 +30,3 @@ Then a browser window will open with the application running.
 
 Start loading the input data and ask questions about the data by following the pages in the application menu.
 
-## Requirements
-
-* `pip install streamlit`
-* `pip install streamlit_option_menu`

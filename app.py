@@ -50,7 +50,7 @@ def load_link_page():
                     with col2:
                         if st.button("❌", key=f"remove_{link_type}_{i}"):
                             st.session_state.links[link_type].pop(i)
-                            st.experimental_rerun()
+                            st.rerun()
 
 
 def load_data_page():
@@ -94,7 +94,7 @@ def load_data_page():
                     with col2:
                         if st.button("❌", key=f"remove_{file_type}_{i}"):
                             st.session_state.files[file_type].pop(i)
-                            st.experimental_rerun()
+                            st.rerun()
 
 
 def clean_data_page():
