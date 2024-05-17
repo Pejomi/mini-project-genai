@@ -13,6 +13,15 @@ if 'links' not in st.session_state:
 if 'files' not in st.session_state:
     st.session_state.files = {"Text": [], "PDF": [], "CSV": []}
 
+if 'documents' not in st.session_state:
+    st.session_state.documents = []
+
+if 'splits' not in st.session_state:
+    st.session_state.splits = []
+
+if 'vectordb' not in st.session_state:
+    st.session_state.vectordb = ""
+
 
 def home_page():
     st.title(f"{selected}")
@@ -97,13 +106,31 @@ def load_data_page():
                             st.experimental_rerun()
 
 
-def clean_data_page():
+def chunking_page():
     st.title(f"{selected}")
 
+    if st.button("Generate"):
 
-def transform_data_page():
+        for link_type, links in st.session_state.links.items():
+            for link in links:
+                st.session_state.documents.extend(load.get_docs_from_wiki(link))
+
+        st.title("Resulting documents:")
+        st.write(st.session_state.documents)
+        st.session_state.splits = chunking.get_splits(st.session_state.documents)
+
+        st.markdown("---")
+        st.title("Result of chunking:")
+        st.write(st.session_state.splits)
+
+
+def vectorizing_data_page():
     st.title(f"{selected}")
 
+    if st.button("Save data in vector DB"):
+        st.session_state.vectordb = persist.store_documents(st.session_state.splits, embedding.get_embeddings())
+
+        st.write("Data saved in vector DB")
 
 def llm_page():
     st.title(f"{selected}")
@@ -112,31 +139,14 @@ def llm_page():
     st.write(
         "Welcome to the Large Language Model (LLM) page! LLMs are powerful AI models capable of generating human-like text.")
 
-    # Example outputs
-    st.write("### Example Outputs:")
-    st.write("- LLM output example 1")
-    st.write("- LLM output example 2")
-
     # Custom input
     st.write("### Generate LLM Output:")
-    input_text = st.text_area("Enter your text here", height=100)
+    question = st.text_area("Enter your question here", height=100)
     if st.button("Generate Output"):
         # Call LLM function to generate output based on input_text
-        generated_output = generate_llm_output(input_text)
+        generated_output = llm.ask(st.session_state.vectordb, question)
         st.write("### Generated Output:")
         st.write(generated_output)
-
-    # Parameter configuration (optional)
-    # temperature = st.slider("Temperature", 0.1, 1.0, 0.5)
-    # max_tokens = st.slider("Max Tokens", 50, 500, 200)
-    # top_p = st.slider("Top P", 0.1, 1.0, 0.9)
-
-
-def generate_llm_output(input_text):
-    # Placeholder function to generate LLM output
-    # You can replace this with your actual LLM model or API call
-    # For simplicity, just return the input text reversed
-    return input_text[::-1]
 
 
 st.header("Mini Project 3 - NLP, NLU, GenAi")
@@ -144,7 +154,7 @@ st.header("Mini Project 3 - NLP, NLU, GenAi")
 with st.sidebar:
     selected = option_menu(
         menu_title="Menu",
-        options=["Home", "Load Link", "Load Data", "Clean Data", "Transform Data", "LLM"],
+        options=["Home", "Load Link", "Load Data", "Chunking Data", "Vectorizing Data", "LLM"],
         icons=["1-square", "2-square", "3-square", "4-square", "5-square", "6-square"],
         menu_icon="folder",
         default_index=0,
@@ -155,9 +165,9 @@ elif selected == "Load Link":
     load_link_page()
 elif selected == "Load Data":
     load_data_page()
-elif selected == "Clean Data":
-    clean_data_page()
-elif selected == "Transform Data":
-    transform_data_page()
+elif selected == "Chunking Data":
+    chunking_page()
+elif selected == "Vectorizing Data":
+    vectorizing_data_page()
 elif selected == "LLM":
     llm_page()

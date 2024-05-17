@@ -1,6 +1,6 @@
 from langchain_community.vectorstores import Chroma
 
-persist_directory = 'data2/chroma/'
+persist_directory = 'data/chroma/'
 
 
 def store_documents(splits, embeddings):

@@ -1,5 +1,5 @@
 # Miniproject 3 (GenAI)
-**By Pejomi (Peter, Jonas & MIe)**
+**By Pejomi (Peter, Jonas & Mie)**
 
 ## Description
 
@@ -22,7 +22,7 @@ The types of input data that the application can handle are:
 
 To get started with the project, you need to clone the repository and install the required packages.
 
-Oppen a terminal and run the following commands to start the application:
+Open a terminal and run the following commands to start the application:
 ```bash
 streamlit run app.py
 ```
@@ -30,3 +30,22 @@ Then a browser window will open with the application running.
 
 Start loading the input data and ask questions about the data by following the pages in the application menu.
 
+## Business implementation
+This sort of application can be implemented for many different things. For example can you implement a chatbot for movie recommendations and explanations. In our example, we gave the LLM context about the "Paranormal Activity" movies.
+
+## Screenshot
+
+### Step 1:
+![img_1.png](images/img_1.png)
+
+### Step 2:
+![img_2.png](images/img_2.png)
+
+### Step 3:
+![img.png](images/img4.png)
+
+### Step 4:
+![img_5.png](images/img_5.png)
+
+### Step 5:
+![img.png](images/img.png)
