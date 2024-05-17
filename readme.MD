@@ -11,6 +11,13 @@ The project is a Streamlit application that can take different types of input da
 
 * `pip install streamlit`
 * `pip install streamlit_option_menu`
+* `pip install spacy`
+* `pip install langdetect`
+* `pip install wordcloud`
+* `pip install langchain`
+* `pip install wikipedia`
+* `pip install sentence-transformers`
+
 
 ## Input Data
 The types of input data that the application can handle are:
