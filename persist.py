@@ -1,9 +1,9 @@
 from langchain_community.vectorstores import Chroma
 
-persist_directory = 'data/chroma/'
+persist_directory = 'data2/chroma/'
 
 
-def store_embeddings(splits, embeddings):
+def store_documents(splits, embeddings):
     # Create the vector store
     vectordb = Chroma.from_documents(
         documents=splits,
@@ -17,7 +17,7 @@ def store_embeddings(splits, embeddings):
     return vectordb
 
 
-def load_embeddings(embeddings):
+def load_documents(embeddings):
     vectordb = Chroma(persist_directory=persist_directory, embedding_function=embeddings)
 
     # You may want to verify loaded data or count entries
